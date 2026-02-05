@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>☠️ OnePiece-Book</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Rye&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="overlay"></div>
+
+    <div class="app-container">
+        
+        <nav class="glass-sidebar">
+            <div class="logo-area">
+                <img src="logo.jpg" alt="Logo" class="logo-img">
+                <h2>OnePiece<br><span>Book</span></h2>
+            </div>
+
+            <ul class="char-list" id="char-list">
+                </ul>
+
+            <div class="sidebar-footer">
+                <p>&copy; 2026 OP-Book</p>
+            </div>
+        </nav>
+
+        <main class="content-area">
+            
+            <header class="char-header">
+                <div class="header-content">
+                    <span class="crew-badge" id="char-group">Straw Hat Pirates</span>
+                    <h1 id="char-name">Monkey D. Luffy</h1>
+                    <p class="japanese-name" id="char-jp-name">モンキー・D・ルフィ</p>
+                </div>
+            </header>
+
+            <div class="showcase-grid">
+                
+                <div class="details-panel">
+                    <div class="glass-card">
+                        <div class="tabs">
+                            <button class="tab-btn active" onclick="openTab('story')">Story</button>
+                            <button class="tab-btn" onclick="openTab('abilities')">Abilities</button>
+                            <button class="tab-btn" onclick="openTab('stats')">Stats</button>
+                        </div>
+
+                        <div id="story" class="tab-content active">
+                            <p class="lead-text" id="char-intro"></p>
+                            <hr class="divider">
+                            <p id="char-desc"></p>
+                        </div>
+
+                        <div id="abilities" class="tab-content">
+                            <h3>Devil Fruit & Powers</h3>
+                            <div class="ability-box" id="char-ability"></div>
+                        </div>
+
+                        <div id="stats" class="tab-content">
+                            <div class="stat-row">
+                                <span>Origin</span>
+                                <strong id="char-origin">East Blue</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>Role</span>
+                                <strong id="char-role">Captain</strong>
+                            </div>
+                            <div class="stat-row">
+                                <span>Age</span>
+                                <strong id="char-age">19</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="visual-panel">
+                    <div class="poster-card">
+                        <div class="poster-inner">
+                            <div class="poster-header">WANTED</div>
+                            <div class="poster-sub">DEAD OR ALIVE</div>
+                            
+                            <div class="poster-image-container">
+                                <img src="" id="poster-img" alt="Character">
+                            </div>
+
+                            <div class="poster-name" id="poster-name">MONKEY D. LUFFY</div>
+                            
+                            <div class="poster-bounty">
+                                <span class="currency">฿</span>
+                                <span id="char-bounty">3,000,000,000</span>
+                                <span class="dashes">-</span>
+                            </div>
+
+                            <div class="poster-footer">MARINE</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
