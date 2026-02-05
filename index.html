@@ -12,18 +12,27 @@
     <div class="hero-bg" id="hero-bg"></div>
     <div class="overlay"></div>
 
+    <button class="mobile-toggle" id="menu-btn" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
     <div class="app-container">
         
-        <nav class="glass-sidebar">
+        <nav class="glass-sidebar" id="sidebar">
             <div class="logo-area">
                 <img src="logo.jpg" alt="Logo" class="logo-img">
                 <h2>OnePiece<br><span>Book</span></h2>
             </div>
 
-            <ul class="char-list" id="char-list">
-                </ul>
+            <div class="nav-scroll">
+                <ul class="char-list" id="char-list">
+                    </ul>
+            </div>
 
             <div class="sidebar-footer">
+                <p>Use <span class="key-hint">←</span> <span class="key-hint">→</span> keys</p>
                 <p>&copy; 2026 OP-Book</p>
             </div>
         </nav>
@@ -41,7 +50,7 @@
             <div class="showcase-grid">
                 
                 <div class="details-panel">
-                    <div class="glass-card">
+                    <div class="glass-card fade-in-up">
                         <div class="tabs">
                             <button class="tab-btn active" onclick="openTab('story')">Story</button>
                             <button class="tab-btn" onclick="openTab('abilities')">Abilities</button>
@@ -77,8 +86,8 @@
                 </div>
 
                 <div class="visual-panel">
-                    <div class="poster-card">
-                        <div class="poster-inner">
+                    <div class="poster-card tilt-card" id="poster-card">
+                        <div class="poster-shine"></div> <div class="poster-inner">
                             <div class="poster-header">WANTED</div>
                             <div class="poster-sub">DEAD OR ALIVE</div>
                             
