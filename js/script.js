@@ -1,4 +1,4 @@
-var characters = [
+const characters = [
 
     // straw hat pirates
 
@@ -351,8 +351,8 @@ var characters = [
 
 
 // state stuff
-var currentIndex = 0;
-var elements = {};
+let currentIndex = 0;
+const elements = {};
 
 
 // grab all the dom elements we need
@@ -417,24 +417,24 @@ function hideLoader() {
 
 // populate the sidebar with character buttons
 function buildSidebar() {
-    var list = elements.charList;
+    const list = elements.charList;
     if (!list) return;
 
-    var fragment = document.createDocumentFragment();
+    const fragment = document.createDocumentFragment();
 
-    for (var i = 0; i < characters.length; i++) {
-        var char = characters[i];
-        var li = document.createElement('li');
-        var btn = document.createElement('button');
+    for (let i = 0; i < characters.length; i++) {
+        const char = characters[i];
+        const li = document.createElement('li');
+        const btn = document.createElement('button');
 
         btn.className = 'char-btn';
         btn.setAttribute('role', 'option');
         btn.id = 'btn-' + i;
 
-        var nameText = document.createTextNode(char.name);
+        const nameText = document.createTextNode(char.name);
         btn.appendChild(nameText);
 
-        var groupTag = document.createElement('span');
+        const groupTag = document.createElement('span');
         groupTag.className = 'char-group-tag';
         groupTag.textContent = char.group;
         btn.appendChild(groupTag);
@@ -460,15 +460,15 @@ function loadCharacter(index) {
     if (index < 0 || index >= characters.length) return;
 
     currentIndex = index;
-    var data = characters[index];
+    const data = characters[index];
 
     // highlight the right button in sidebar
-    var allButtons = document.querySelectorAll('.char-btn');
-    for (var i = 0; i < allButtons.length; i++) {
+    const allButtons = document.querySelectorAll('.char-btn');
+    for (let i = 0; i < allButtons.length; i++) {
         allButtons[i].classList.remove('active');
         allButtons[i].setAttribute('aria-selected', 'false');
     }
-    var activeBtn = document.getElementById('btn-' + index);
+    const activeBtn = document.getElementById('btn-' + index);
     if (activeBtn) {
         activeBtn.classList.add('active');
         activeBtn.setAttribute('aria-selected', 'true');
@@ -514,13 +514,13 @@ function loadCharacter(index) {
 
 // load the character image, fall back to logo if missing
 function loadCharacterImage(data) {
-    var img = elements.posterImg;
-    var hero = elements.heroBg;
+    const img = elements.posterImg;
+    const hero = elements.heroBg;
     if (!img || !hero) return;
 
     img.style.opacity = '0';
 
-    var tempImg = new Image();
+    const tempImg = new Image();
     tempImg.src = data.img;
 
     tempImg.onload = function() {
@@ -540,12 +540,12 @@ function loadCharacterImage(data) {
 
 // draw the animated power bars in stats tab
 function renderPowerBars(power) {
-    var container = elements.powerBars;
+    const container = elements.powerBars;
     if (!container) return;
 
     container.innerHTML = '';
 
-    var stats = [
+    const stats = [
         { label: 'Strength', value: power.strength },
         { label: 'Speed', value: power.speed },
         { label: 'Haki', value: power.haki },
@@ -553,20 +553,20 @@ function renderPowerBars(power) {
         { label: 'Endurance', value: power.endurance }
     ];
 
-    for (var i = 0; i < stats.length; i++) {
-        var stat = stats[i];
+    for (let i = 0; i < stats.length; i++) {
+        const stat = stats[i];
 
-        var item = document.createElement('div');
+        const item = document.createElement('div');
         item.className = 'power-bar-item';
 
-        var label = document.createElement('div');
+        const label = document.createElement('div');
         label.className = 'power-bar-label';
         label.innerHTML = '<span>' + stat.label + '</span><span>' + stat.value + '/100</span>';
 
-        var track = document.createElement('div');
+        const track = document.createElement('div');
         track.className = 'power-bar-track';
 
-        var fill = document.createElement('div');
+        const fill = document.createElement('div');
         fill.className = 'power-bar-fill';
 
         track.appendChild(fill);
@@ -586,9 +586,9 @@ function renderPowerBars(power) {
 
 // tab switching logic
 function setupTabs() {
-    var tabButtons = document.querySelectorAll('.tab-btn[data-tab]');
+    const tabButtons = document.querySelectorAll('.tab-btn[data-tab]');
 
-    for (var i = 0; i < tabButtons.length; i++) {
+    for (let i = 0; i < tabButtons.length; i++) {
         tabButtons[i].addEventListener('click', function() {
             switchTab(this.getAttribute('data-tab'));
         });
@@ -596,21 +596,21 @@ function setupTabs() {
 }
 
 function switchTab(tabName) {
-    var contents = document.querySelectorAll('.tab-content');
-    var buttons = document.querySelectorAll('.tab-btn[data-tab]');
+    const contents = document.querySelectorAll('.tab-content');
+    const buttons = document.querySelectorAll('.tab-btn[data-tab]');
 
-    for (var i = 0; i < contents.length; i++) {
+    for (let i = 0; i < contents.length; i++) {
         contents[i].classList.remove('active');
     }
-    for (var j = 0; j < buttons.length; j++) {
+    for (let j = 0; j < buttons.length; j++) {
         buttons[j].classList.remove('active');
         buttons[j].setAttribute('aria-selected', 'false');
     }
 
-    var targetContent = document.getElementById(tabName);
+    const targetContent = document.getElementById(tabName);
     if (targetContent) targetContent.classList.add('active');
 
-    var targetBtn = document.querySelector('.tab-btn[data-tab="' + tabName + '"]');
+    const targetBtn = document.querySelector('.tab-btn[data-tab="' + tabName + '"]');
     if (targetBtn) {
         targetBtn.classList.add('active');
         targetBtn.setAttribute('aria-selected', 'true');
@@ -622,24 +622,24 @@ window.switchTab = switchTab;
 
 // the fun part - 3d tilt on the wanted poster
 function setup3DTilt() {
-    var card = elements.posterCard;
-    var shine = elements.posterShine;
+    const card = elements.posterCard;
+    const shine = elements.posterShine;
     if (!card || !shine) return;
 
     card.addEventListener('mousemove', function(e) {
-        var rect = card.getBoundingClientRect();
-        var x = e.clientX - rect.left;
-        var y = e.clientY - rect.top;
-        var centerX = rect.width / 2;
-        var centerY = rect.height / 2;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
 
-        var rotateX = ((y - centerY) / centerY) * -12;
-        var rotateY = ((x - centerX) / centerX) * 12;
+        const rotateX = ((y - centerY) / centerY) * -12;
+        const rotateY = ((x - centerX) / centerX) * 12;
 
         card.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale(1.05)';
 
-        var shineX = (x / rect.width) * 100;
-        var shineY = (y / rect.height) * 100;
+        const shineX = (x / rect.width) * 100;
+        const shineY = (y / rect.height) * 100;
         shine.style.background = 'radial-gradient(circle at ' + shineX + '% ' + shineY + '%, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 80%)';
         shine.style.opacity = '1';
     });
@@ -663,12 +663,12 @@ function setupKeyboardNav() {
 
         if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
             e.preventDefault();
-            var next = currentIndex + 1;
+            let next = currentIndex + 1;
             if (next >= characters.length) next = 0;
             loadCharacter(next);
         } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
             e.preventDefault();
-            var prev = currentIndex - 1;
+            let prev = currentIndex - 1;
             if (prev < 0) prev = characters.length - 1;
             loadCharacter(prev);
         } else if (e.key === 'Escape') {
@@ -690,8 +690,8 @@ function setupMobileMenu() {
     // close sidebar if you tap outside of it
     document.addEventListener('click', function(e) {
         if (window.innerWidth > 900) return;
-        var clickedInside = elements.sidebar.contains(e.target);
-        var clickedBtn = elements.menuBtn.contains(e.target);
+        const clickedInside = elements.sidebar.contains(e.target);
+        const clickedBtn = elements.menuBtn.contains(e.target);
         if (!clickedInside && !clickedBtn && elements.sidebar.classList.contains('open')) {
             closeMobileMenu();
         }
@@ -709,15 +709,15 @@ function setupSearch() {
     if (!elements.searchInput) return;
 
     elements.searchInput.addEventListener('input', function() {
-        var query = this.value.toLowerCase().trim();
-        var buttons = document.querySelectorAll('.char-btn');
+        const query = this.value.toLowerCase().trim();
+        const buttons = document.querySelectorAll('.char-btn');
 
-        for (var i = 0; i < characters.length; i++) {
-            var char = characters[i];
-            var btn = buttons[i];
+        for (let i = 0; i < characters.length; i++) {
+            const char = characters[i];
+            const btn = buttons[i];
             if (!btn) continue;
 
-            var match = char.name.toLowerCase().indexOf(query) !== -1
+            const match = char.name.toLowerCase().indexOf(query) !== -1
                      || char.group.toLowerCase().indexOf(query) !== -1
                      || char.role.toLowerCase().indexOf(query) !== -1;
 
@@ -736,7 +736,7 @@ function setupRandomBtn() {
     if (!elements.randomBtn) return;
 
     elements.randomBtn.addEventListener('click', function() {
-        var randomIndex = Math.floor(Math.random() * characters.length);
+        let randomIndex = Math.floor(Math.random() * characters.length);
 
         if (characters.length > 1) {
             while (randomIndex === currentIndex) {
@@ -752,11 +752,11 @@ function setupRandomBtn() {
 
 // swipe left/right on mobile to switch characters
 function setupSwipeNav() {
-    var content = elements.contentArea;
+    const content = elements.contentArea;
     if (!content) return;
 
-    var startX = 0;
-    var endX = 0;
+    let startX = 0;
+    let endX = 0;
 
     content.addEventListener('touchstart', function(e) {
         startX = e.changedTouches[0].screenX;
@@ -764,19 +764,19 @@ function setupSwipeNav() {
 
     content.addEventListener('touchend', function(e) {
         endX = e.changedTouches[0].screenX;
-        var diff = startX - endX;
+        const diff = startX - endX;
 
         // need at least 80px swipe to count
         if (Math.abs(diff) < 80) return;
 
         if (diff > 0) {
             // swiped left = next
-            var next = currentIndex + 1;
+            let next = currentIndex + 1;
             if (next >= characters.length) next = 0;
             loadCharacter(next);
         } else {
             // swiped right = previous
-            var prev = currentIndex - 1;
+            let prev = currentIndex - 1;
             if (prev < 0) prev = characters.length - 1;
             loadCharacter(prev);
         }
