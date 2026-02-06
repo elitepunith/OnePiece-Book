@@ -1,11 +1,3 @@
-/*
-    OnePiece-Book v3.1
-    by elitepunith
-    
-    pirate encyclopedia - straw hats + legends
-    built with plain js, no frameworks needed
-*/
-
 var characters = [
 
     // straw hat pirates
