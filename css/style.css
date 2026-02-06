@@ -1,5 +1,5 @@
 /* =============================================
-   OnePiece-Book — Complete Stylesheet v2.0
+   OnePiece-Book — Complete Stylesheet v3.0
    Author: elitepunith
    ============================================= */
 
@@ -155,7 +155,7 @@ body {
 
 /* --- SEARCH BOX --- */
 .search-box {
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 }
 
 .search-box input {
@@ -178,6 +178,39 @@ body {
 .search-box input:focus {
     border-color: var(--accent);
     box-shadow: 0 0 12px var(--accent-glow);
+}
+
+/* --- FILTER TAGS --- */
+.filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 15px;
+}
+
+.filter-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-family: var(--font-inter);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    outline: none;
+}
+
+.filter-btn:hover {
+    color: #fff;
+    border-color: var(--accent);
+}
+
+.filter-btn.active {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+    font-weight: 600;
 }
 
 /* --- NAV SCROLL --- */
@@ -250,23 +283,35 @@ body {
     display: none;
 }
 
+/* --- RANDOM BUTTON --- */
+.random-btn {
+    display: block;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    padding: 10px;
+    border-radius: 8px;
+    font-family: var(--font-inter);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    margin-bottom: 10px;
+}
+
+.random-btn:hover {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+    transform: scale(1.02);
+}
+
 /* --- SIDEBAR FOOTER --- */
 .sidebar-footer {
     margin-top: 15px;
     font-size: 0.8rem;
     color: #555;
     text-align: center;
-}
-
-.sidebar-footer kbd {
-    display: inline-block;
-    border: 1px solid #444;
-    padding: 2px 7px;
-    border-radius: 4px;
-    font-size: 0.7rem;
-    font-family: inherit;
-    background: rgba(255, 255, 255, 0.05);
-    margin: 0 2px;
 }
 
 /* --- MOBILE TOGGLE --- */
@@ -349,6 +394,18 @@ body {
     font-size: 1.6rem;
     color: rgba(255, 255, 255, 0.18);
     font-weight: 300;
+}
+
+/* --- CHARACTER QUOTE --- */
+.char-quote {
+    font-style: italic;
+    color: var(--accent);
+    font-size: 1rem;
+    margin-top: 10px;
+    opacity: 0.85;
+    line-height: 1.5;
+    min-height: 1.5em;
+    transition: opacity 0.4s ease;
 }
 
 /* --- SHOWCASE GRID --- */
@@ -723,6 +780,10 @@ body {
 
     .japanese-name {
         font-size: 1.1rem;
+    }
+
+    .char-quote {
+        font-size: 0.85rem;
     }
 
     .showcase-grid {

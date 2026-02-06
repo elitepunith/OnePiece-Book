@@ -59,12 +59,21 @@
                 <input type="text" id="search-input" placeholder="Search pirate..." aria-label="Search characters">
             </div>
 
+            <!-- Filter Tags -->
+            <div class="filter-tags" id="filter-tags">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="Straw Hat Pirates">Straw Hats</button>
+                <button class="filter-btn" data-filter="legends">Legends</button>
+                <button class="filter-btn" data-filter="Marines">Marines</button>
+            </div>
+
             <div class="nav-scroll">
                 <ul class="char-list" id="char-list" role="listbox"></ul>
             </div>
 
             <div class="sidebar-footer">
-                <p>Use <kbd>←</kbd> <kbd>→</kbd> to navigate</p>
+                <!-- Random Pirate Button -->
+                <button class="random-btn" id="random-btn">🎲 Random Pirate</button>
                 <p>&copy; 2026 OP-Book</p>
             </div>
         </nav>
@@ -78,6 +87,7 @@
                     <span class="crew-badge" id="char-group">Straw Hat Pirates</span>
                     <h1 id="char-name">Monkey D. Luffy</h1>
                     <p class="japanese-name" id="char-jp-name">モンキー・D・ルフィ</p>
+                    <p class="char-quote" id="char-quote"></p>
                 </div>
             </header>
 
@@ -120,6 +130,10 @@
                                 <span>Height</span>
                                 <strong id="char-height">174cm</strong>
                             </div>
+                            <div class="stat-row">
+                                <span>First Appearance</span>
+                                <strong id="char-debut">Chapter 1</strong>
+                            </div>
 
                             <!-- Power Bars -->
                             <h4 class="power-heading">Power Ratings</h4>
@@ -153,7 +167,7 @@
                     </div>
 
                     <!-- Character counter -->
-                    <div class="char-counter" id="char-counter">1 / 12</div>
+                    <div class="char-counter" id="char-counter">1 / 19</div>
                 </div>
 
             </div>
