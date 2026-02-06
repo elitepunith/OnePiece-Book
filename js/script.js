@@ -189,7 +189,7 @@ var characters = [
         height: "301cm",
         debut: "Chapter 528",
         bounty: "1,100,000,000",
-        img: "images/jinbe.jpeg",
+        img: "images/jinbe.jpg",
         power: { strength: 90, speed: 65, haki: 80, devilFruit: 0, endurance: 92 }
     },
 
