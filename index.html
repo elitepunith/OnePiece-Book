@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>☠️ OnePiece-Book — Pirate Encyclopedia</title>
 
-    <!-- SEO & Social -->
     <meta name="description" content="An interactive One Piece character encyclopedia featuring wanted posters, crew info, and abilities.">
     <meta name="keywords" content="One Piece, Luffy, Straw Hat, Anime, Manga, Wanted Poster, Character Guide">
     <meta name="author" content="elitepunith">
@@ -15,30 +14,26 @@
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#d93a3a">
 
-    <!-- Favicon -->
     <link rel="icon" href="images/logo.jpg" type="image/jpeg">
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Rye&display=swap" rel="stylesheet">
 
-    <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- Blurred background layer -->
     <div class="hero-bg" id="hero-bg" aria-hidden="true"></div>
     <div class="overlay" aria-hidden="true"></div>
 
-    <!-- Loading screen -->
+    <!-- loader -->
     <div class="loader" id="loader">
         <div class="loader-skull">☠️</div>
         <p>Setting Sail...</p>
     </div>
 
-    <!-- Mobile hamburger -->
+    <!-- hamburger for mobile -->
     <button class="mobile-toggle" id="menu-btn" aria-label="Toggle navigation menu">
         <span></span>
         <span></span>
@@ -47,24 +42,14 @@
 
     <div class="app-container">
 
-        <!-- Sidebar Navigation -->
         <nav class="glass-sidebar" id="sidebar" role="navigation" aria-label="Character list">
             <div class="logo-area">
                 <img src="images/logo.jpg" alt="One Piece Book Logo" class="logo-img" width="55" height="55">
                 <h2>OnePiece<br><span>Book</span></h2>
             </div>
 
-            <!-- Search -->
             <div class="search-box">
                 <input type="text" id="search-input" placeholder="Search pirate..." aria-label="Search characters">
-            </div>
-
-            <!-- Filter Tags -->
-            <div class="filter-tags" id="filter-tags">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="Straw Hat Pirates">Straw Hats</button>
-                <button class="filter-btn" data-filter="legends">Legends</button>
-                <button class="filter-btn" data-filter="Marines">Marines</button>
             </div>
 
             <div class="nav-scroll">
@@ -72,16 +57,13 @@
             </div>
 
             <div class="sidebar-footer">
-                <!-- Random Pirate Button -->
                 <button class="random-btn" id="random-btn">🎲 Random Pirate</button>
                 <p>&copy; 2026 OP-Book</p>
             </div>
         </nav>
 
-        <!-- Main Content -->
         <main class="content-area" id="content-area">
 
-            <!-- Character Header -->
             <header class="char-header" id="char-header">
                 <div class="header-content">
                     <span class="crew-badge" id="char-group">Straw Hat Pirates</span>
@@ -93,7 +75,6 @@
 
             <div class="showcase-grid">
 
-                <!-- Details Panel -->
                 <div class="details-panel">
                     <div class="glass-card fade-in-up">
                         <div class="tabs" role="tablist">
@@ -135,14 +116,12 @@
                                 <strong id="char-debut">Chapter 1</strong>
                             </div>
 
-                            <!-- Power Bars -->
                             <h4 class="power-heading">Power Ratings</h4>
                             <div class="power-bars" id="power-bars"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Wanted Poster -->
                 <div class="visual-panel">
                     <div class="poster-card tilt-card" id="poster-card">
                         <div class="poster-shine" aria-hidden="true"></div>
@@ -166,15 +145,13 @@
                         </div>
                     </div>
 
-                    <!-- Character counter -->
-                    <div class="char-counter" id="char-counter">1 / 19</div>
+                    <div class="char-counter" id="char-counter"></div>
                 </div>
 
             </div>
         </main>
     </div>
 
-    <!-- Back to top -->
     <button class="back-to-top" id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 
     <script src="js/script.js"></script>

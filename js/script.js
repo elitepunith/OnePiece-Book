@@ -1,11 +1,15 @@
-/* =============================================
-   OnePiece-Book — Main Script v3.0
-   Author: elitepunith
-   ============================================= */
+/*
+    OnePiece-Book v3.1
+    by elitepunith
+    
+    pirate encyclopedia - straw hats + legends
+    built with plain js, no frameworks needed
+*/
 
-// ---- CHARACTER DATABASE ----
 var characters = [
-    // === STRAW HAT PIRATES ===
+
+    // straw hat pirates
+
     {
         id: "luffy",
         name: "Monkey D. Luffy",
@@ -193,10 +197,12 @@ var characters = [
         height: "301cm",
         debut: "Chapter 528",
         bounty: "1,100,000,000",
-        img: "images/jinbe.jpg",
+        img: "images/jinbe.jpeg",
         power: { strength: 90, speed: 65, haki: 80, devilFruit: 0, endurance: 92 }
     },
-    // === LEGENDS ===
+
+    // legends & other pirates
+
     {
         id: "shanks",
         name: "Red-Haired Shanks",
@@ -330,7 +336,6 @@ var characters = [
         img: "images/ace.jpg",
         power: { strength: 85, speed: 82, haki: 75, devilFruit: 90, endurance: 80 }
     },
-    
     {
         id: "whitebeard",
         name: "Edward Newgate",
@@ -352,12 +357,14 @@ var characters = [
     }
 ];
 
-// ---- STATE ----
+
+// state stuff
 var currentIndex = 0;
-var currentFilter = 'all';
 var elements = {};
 
-// ---- CACHE DOM ELEMENTS (called after DOM is ready) ----
+
+// grab all the dom elements we need
+// this runs AFTER the page loads so nothing is null
 function cacheElements() {
     elements.charList = document.getElementById('char-list');
     elements.charName = document.getElementById('char-name');
@@ -388,10 +395,10 @@ function cacheElements() {
     elements.backToTop = document.getElementById('back-to-top');
     elements.contentArea = document.getElementById('content-area');
     elements.randomBtn = document.getElementById('random-btn');
-    elements.filterTags = document.getElementById('filter-tags');
 }
 
-// ---- INITIALIZATION ----
+
+// kick everything off once the page is ready
 document.addEventListener('DOMContentLoaded', function() {
     cacheElements();
     buildSidebar();
@@ -403,21 +410,20 @@ document.addEventListener('DOMContentLoaded', function() {
     setupSearch();
     setupBackToTop();
     setupRandomBtn();
-    setupFilterTags();
     setupSwipeNav();
     hideLoader();
 });
 
-// ---- LOADING SCREEN ----
+
+// hide the skull loading screen after a short delay
 function hideLoader() {
     setTimeout(function() {
-        if (elements.loader) {
-            elements.loader.classList.add('hidden');
-        }
+        if (elements.loader) elements.loader.classList.add('hidden');
     }, 800);
 }
 
-// ---- BUILD SIDEBAR ----
+
+// populate the sidebar with character buttons
 function buildSidebar() {
     var list = elements.charList;
     if (!list) return;
@@ -441,6 +447,7 @@ function buildSidebar() {
         groupTag.textContent = char.group;
         btn.appendChild(groupTag);
 
+        // closure trick so each button remembers its own index
         btn.addEventListener('click', (function(index) {
             return function() {
                 loadCharacter(index);
@@ -455,14 +462,15 @@ function buildSidebar() {
     list.appendChild(fragment);
 }
 
-// ---- LOAD CHARACTER ----
+
+// the big one - loads all the character data into the page
 function loadCharacter(index) {
     if (index < 0 || index >= characters.length) return;
 
     currentIndex = index;
     var data = characters[index];
 
-    // Update active button in sidebar
+    // highlight the right button in sidebar
     var allButtons = document.querySelectorAll('.char-btn');
     for (var i = 0; i < allButtons.length; i++) {
         allButtons[i].classList.remove('active');
@@ -475,11 +483,11 @@ function loadCharacter(index) {
         activeBtn.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     }
 
-    // Dynamic accent color
+    // swap the accent color to match the character
     document.documentElement.style.setProperty('--accent', data.color);
     document.documentElement.style.setProperty('--accent-glow', data.color + '66');
 
-    // Update text content
+    // fill in all the text fields
     if (elements.charName) elements.charName.textContent = data.name;
     if (elements.charJpName) elements.charJpName.textContent = data.jp;
     if (elements.charGroup) elements.charGroup.textContent = data.group;
@@ -493,30 +501,26 @@ function loadCharacter(index) {
     if (elements.charDebut) elements.charDebut.textContent = data.debut;
     if (elements.charQuote) elements.charQuote.textContent = '"' + data.quote + '"';
 
-    // Poster updates
+    // poster stuff
     if (elements.posterName) elements.posterName.textContent = data.name.toUpperCase();
     if (elements.charBounty) elements.charBounty.textContent = data.bounty;
 
-    // Counter
+    // counter like "3 / 18"
     if (elements.charCounter) elements.charCounter.textContent = (index + 1) + ' / ' + characters.length;
 
-    // Image loading with fallback
     loadCharacterImage(data);
-
-    // Power bars
     renderPowerBars(data.power);
 
-    // Switch to Story tab
+    // always go back to story tab when switching characters
     switchTab('story');
 
-    // Replay header animation
     replayAnimation(elements.charHeader, 'slideDown 0.6s ease');
 
-    // Update poster alt text
     if (elements.posterImg) elements.posterImg.alt = 'Wanted poster of ' + data.name;
 }
 
-// ---- IMAGE LOADER ----
+
+// load the character image, fall back to logo if missing
 function loadCharacterImage(data) {
     var img = elements.posterImg;
     var hero = elements.heroBg;
@@ -534,14 +538,15 @@ function loadCharacterImage(data) {
     };
 
     tempImg.onerror = function() {
-        console.warn('Image missing for ' + data.name + '. Using fallback.');
+        console.warn('missing image for ' + data.name + ', using fallback');
         img.src = 'images/logo.jpg';
         hero.style.backgroundImage = "url('images/logo.jpg')";
         img.style.opacity = '1';
     };
 }
 
-// ---- POWER BARS ----
+
+// draw the animated power bars in stats tab
 function renderPowerBars(power) {
     var container = elements.powerBars;
     if (!container) return;
@@ -577,7 +582,7 @@ function renderPowerBars(power) {
         item.appendChild(track);
         container.appendChild(item);
 
-        // Animate after a tiny delay so the browser registers width: 0 first
+        // stagger the animation a bit so they fill up one after another
         (function(fillEl, val) {
             setTimeout(function() {
                 fillEl.style.width = val + '%';
@@ -586,14 +591,14 @@ function renderPowerBars(power) {
     }
 }
 
-// ---- TABS ----
+
+// tab switching logic
 function setupTabs() {
     var tabButtons = document.querySelectorAll('.tab-btn[data-tab]');
 
     for (var i = 0; i < tabButtons.length; i++) {
         tabButtons[i].addEventListener('click', function() {
-            var tabName = this.getAttribute('data-tab');
-            switchTab(tabName);
+            switchTab(this.getAttribute('data-tab'));
         });
     }
 }
@@ -605,16 +610,13 @@ function switchTab(tabName) {
     for (var i = 0; i < contents.length; i++) {
         contents[i].classList.remove('active');
     }
-
     for (var j = 0; j < buttons.length; j++) {
         buttons[j].classList.remove('active');
         buttons[j].setAttribute('aria-selected', 'false');
     }
 
     var targetContent = document.getElementById(tabName);
-    if (targetContent) {
-        targetContent.classList.add('active');
-    }
+    if (targetContent) targetContent.classList.add('active');
 
     var targetBtn = document.querySelector('.tab-btn[data-tab="' + tabName + '"]');
     if (targetBtn) {
@@ -625,7 +627,8 @@ function switchTab(tabName) {
 
 window.switchTab = switchTab;
 
-// ---- 3D TILT EFFECT ----
+
+// the fun part - 3d tilt on the wanted poster
 function setup3DTilt() {
     var card = elements.posterCard;
     var shine = elements.posterShine;
@@ -654,12 +657,14 @@ function setup3DTilt() {
         shine.style.opacity = '0';
     });
 
+    // tilt doesnt really work on touch so just reset it
     card.addEventListener('touchstart', function() {
         card.style.transform = 'rotate(2deg)';
     }, { passive: true });
 }
 
-// ---- KEYBOARD NAVIGATION ----
+
+// arrow keys to go prev/next, escape to close sidebar
 function setupKeyboardNav() {
     document.addEventListener('keydown', function(e) {
         if (document.activeElement === elements.searchInput) return;
@@ -680,7 +685,8 @@ function setupKeyboardNav() {
     });
 }
 
-// ---- MOBILE MENU ----
+
+// mobile sidebar toggle
 function setupMobileMenu() {
     if (!elements.menuBtn || !elements.sidebar) return;
 
@@ -689,13 +695,12 @@ function setupMobileMenu() {
         elements.sidebar.classList.toggle('open');
     });
 
+    // close sidebar if you tap outside of it
     document.addEventListener('click', function(e) {
         if (window.innerWidth > 900) return;
-
-        var clickedInsideSidebar = elements.sidebar.contains(e.target);
-        var clickedMenuBtn = elements.menuBtn.contains(e.target);
-
-        if (!clickedInsideSidebar && !clickedMenuBtn && elements.sidebar.classList.contains('open')) {
+        var clickedInside = elements.sidebar.contains(e.target);
+        var clickedBtn = elements.menuBtn.contains(e.target);
+        if (!clickedInside && !clickedBtn && elements.sidebar.classList.contains('open')) {
             closeMobileMenu();
         }
     });
@@ -706,7 +711,8 @@ function closeMobileMenu() {
     if (elements.sidebar) elements.sidebar.classList.remove('open');
 }
 
-// ---- SEARCH ----
+
+// search by name, crew, or role
 function setupSearch() {
     if (!elements.searchInput) return;
 
@@ -719,11 +725,11 @@ function setupSearch() {
             var btn = buttons[i];
             if (!btn) continue;
 
-            var matchesName = char.name.toLowerCase().indexOf(query) !== -1;
-            var matchesGroup = char.group.toLowerCase().indexOf(query) !== -1;
-            var matchesRole = char.role.toLowerCase().indexOf(query) !== -1;
+            var match = char.name.toLowerCase().indexOf(query) !== -1
+                     || char.group.toLowerCase().indexOf(query) !== -1
+                     || char.role.toLowerCase().indexOf(query) !== -1;
 
-            if (matchesName || matchesGroup || matchesRole) {
+            if (match) {
                 btn.classList.remove('hidden');
             } else {
                 btn.classList.add('hidden');
@@ -732,67 +738,14 @@ function setupSearch() {
     });
 }
 
-// ---- FILTER TAGS ----
-function setupFilterTags() {
-    if (!elements.filterTags) return;
 
-    var filterButtons = elements.filterTags.querySelectorAll('.filter-btn');
-
-    for (var i = 0; i < filterButtons.length; i++) {
-        filterButtons[i].addEventListener('click', function() {
-            var filter = this.getAttribute('data-filter');
-            currentFilter = filter;
-
-            // Update active filter button
-            for (var j = 0; j < filterButtons.length; j++) {
-                filterButtons[j].classList.remove('active');
-            }
-            this.classList.add('active');
-
-            // Filter sidebar characters
-            var charButtons = document.querySelectorAll('.char-btn');
-            var legendGroups = ['Red Hair Pirates', 'Beast Pirates', 'Blackbeard Pirates', 'Heart Pirates', 'Kuja Pirates', 'Cross Guild', 'Whitebeard Pirates'];
-
-            for (var k = 0; k < characters.length; k++) {
-                var char = characters[k];
-                var btn = charButtons[k];
-                if (!btn) continue;
-
-                var show = false;
-
-                if (filter === 'all') {
-                    show = true;
-                } else if (filter === 'legends') {
-                    show = legendGroups.indexOf(char.group) !== -1;
-                } else if (filter === 'Marines') {
-                    show = char.group === 'Marines';
-                } else {
-                    show = char.group === filter;
-                }
-
-                if (show) {
-                    btn.classList.remove('hidden');
-                } else {
-                    btn.classList.add('hidden');
-                }
-            }
-
-            // Clear search when filtering
-            if (elements.searchInput) {
-                elements.searchInput.value = '';
-            }
-        });
-    }
-}
-
-// ---- RANDOM PIRATE BUTTON ----
+// pick a random pirate (wont pick the same one twice in a row)
 function setupRandomBtn() {
     if (!elements.randomBtn) return;
 
     elements.randomBtn.addEventListener('click', function() {
         var randomIndex = Math.floor(Math.random() * characters.length);
 
-        // Make sure we don't get the same character
         if (characters.length > 1) {
             while (randomIndex === currentIndex) {
                 randomIndex = Math.floor(Math.random() * characters.length);
@@ -804,32 +757,33 @@ function setupRandomBtn() {
     });
 }
 
-// ---- SWIPE NAVIGATION (mobile) ----
+
+// swipe left/right on mobile to switch characters
 function setupSwipeNav() {
-    var contentArea = elements.contentArea;
-    if (!contentArea) return;
+    var content = elements.contentArea;
+    if (!content) return;
 
-    var touchStartX = 0;
-    var touchEndX = 0;
-    var minSwipeDistance = 80;
+    var startX = 0;
+    var endX = 0;
 
-    contentArea.addEventListener('touchstart', function(e) {
-        touchStartX = e.changedTouches[0].screenX;
+    content.addEventListener('touchstart', function(e) {
+        startX = e.changedTouches[0].screenX;
     }, { passive: true });
 
-    contentArea.addEventListener('touchend', function(e) {
-        touchEndX = e.changedTouches[0].screenX;
-        var diff = touchStartX - touchEndX;
+    content.addEventListener('touchend', function(e) {
+        endX = e.changedTouches[0].screenX;
+        var diff = startX - endX;
 
-        if (Math.abs(diff) < minSwipeDistance) return;
+        // need at least 80px swipe to count
+        if (Math.abs(diff) < 80) return;
 
         if (diff > 0) {
-            // Swiped left — next character
+            // swiped left = next
             var next = currentIndex + 1;
             if (next >= characters.length) next = 0;
             loadCharacter(next);
         } else {
-            // Swiped right — previous character
+            // swiped right = previous
             var prev = currentIndex - 1;
             if (prev < 0) prev = characters.length - 1;
             loadCharacter(prev);
@@ -837,7 +791,8 @@ function setupSwipeNav() {
     }, { passive: true });
 }
 
-// ---- BACK TO TOP ----
+
+// show/hide the scroll-to-top button
 function setupBackToTop() {
     if (!elements.backToTop || !elements.contentArea) return;
 
@@ -854,10 +809,11 @@ function setupBackToTop() {
     });
 }
 
-// ---- UTILITY: REPLAY ANIMATION ----
+
+// helper to replay a css animation (remove it then re-add)
 function replayAnimation(element, animationValue) {
     if (!element) return;
     element.style.animation = 'none';
-    element.offsetHeight; // Force reflow
+    element.offsetHeight;
     element.style.animation = animationValue;
 }
