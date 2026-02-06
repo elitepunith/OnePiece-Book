@@ -3,43 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>☠️ OnePiece-Book</title>
-    <link rel="stylesheet" href="style.css">
+    <title>☠️ OnePiece-Book — Pirate Encyclopedia</title>
+
+    <!-- SEO & Social -->
+    <meta name="description" content="An interactive One Piece character encyclopedia featuring wanted posters, crew info, and abilities.">
+    <meta name="keywords" content="One Piece, Luffy, Straw Hat, Anime, Manga, Wanted Poster, Character Guide">
+    <meta name="author" content="elitepunith">
+    <meta property="og:title" content="OnePiece-Book">
+    <meta property="og:description" content="Explore the Straw Hat crew and legendary pirates of the Grand Line.">
+    <meta property="og:image" content="images/logo.jpg">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#d93a3a">
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/logo.jpg" type="image/jpeg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Rye&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <div class="hero-bg" id="hero-bg"></div>
-    <div class="overlay"></div>
+    <!-- Blurred background layer -->
+    <div class="hero-bg" id="hero-bg" aria-hidden="true"></div>
+    <div class="overlay" aria-hidden="true"></div>
 
-    <button class="mobile-toggle" id="menu-btn" aria-label="Toggle Menu">
+    <!-- Loading screen -->
+    <div class="loader" id="loader">
+        <div class="loader-skull">☠️</div>
+        <p>Setting Sail...</p>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button class="mobile-toggle" id="menu-btn" aria-label="Toggle navigation menu">
         <span></span>
         <span></span>
         <span></span>
     </button>
 
     <div class="app-container">
-        
-        <nav class="glass-sidebar" id="sidebar">
+
+        <!-- Sidebar Navigation -->
+        <nav class="glass-sidebar" id="sidebar" role="navigation" aria-label="Character list">
             <div class="logo-area">
-                <img src="logo.jpg" alt="Logo" class="logo-img">
+                <img src="images/logo.jpg" alt="One Piece Book Logo" class="logo-img" width="55" height="55">
                 <h2>OnePiece<br><span>Book</span></h2>
             </div>
 
+            <!-- Search -->
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search pirate..." aria-label="Search characters">
+            </div>
+
             <div class="nav-scroll">
-                <ul class="char-list" id="char-list">
-                    </ul>
+                <ul class="char-list" id="char-list" role="listbox"></ul>
             </div>
 
             <div class="sidebar-footer">
-                <p>Use <span class="key-hint">←</span> <span class="key-hint">→</span> keys</p>
+                <p>Use <kbd>←</kbd> <kbd>→</kbd> to navigate</p>
                 <p>&copy; 2026 OP-Book</p>
             </div>
         </nav>
 
-        <main class="content-area">
-            
-            <header class="char-header">
+        <!-- Main Content -->
+        <main class="content-area" id="content-area">
+
+            <!-- Character Header -->
+            <header class="char-header" id="char-header">
                 <div class="header-content">
                     <span class="crew-badge" id="char-group">Straw Hat Pirates</span>
                     <h1 id="char-name">Monkey D. Luffy</h1>
@@ -48,27 +82,28 @@
             </header>
 
             <div class="showcase-grid">
-                
+
+                <!-- Details Panel -->
                 <div class="details-panel">
                     <div class="glass-card fade-in-up">
-                        <div class="tabs">
-                            <button class="tab-btn active" onclick="openTab('story')">Story</button>
-                            <button class="tab-btn" onclick="openTab('abilities')">Abilities</button>
-                            <button class="tab-btn" onclick="openTab('stats')">Stats</button>
+                        <div class="tabs" role="tablist">
+                            <button class="tab-btn active" data-tab="story" role="tab" aria-selected="true" aria-controls="story">Story</button>
+                            <button class="tab-btn" data-tab="abilities" role="tab" aria-selected="false" aria-controls="abilities">Abilities</button>
+                            <button class="tab-btn" data-tab="stats" role="tab" aria-selected="false" aria-controls="stats">Stats</button>
                         </div>
 
-                        <div id="story" class="tab-content active">
+                        <div id="story" class="tab-content active" role="tabpanel">
                             <p class="lead-text" id="char-intro"></p>
                             <hr class="divider">
                             <p id="char-desc"></p>
                         </div>
 
-                        <div id="abilities" class="tab-content">
-                            <h3>Devil Fruit & Powers</h3>
+                        <div id="abilities" class="tab-content" role="tabpanel">
+                            <h3>Devil Fruit &amp; Powers</h3>
                             <div class="ability-box" id="char-ability"></div>
                         </div>
 
-                        <div id="stats" class="tab-content">
+                        <div id="stats" class="tab-content" role="tabpanel">
                             <div class="stat-row">
                                 <span>Origin</span>
                                 <strong id="char-origin">East Blue</strong>
@@ -81,22 +116,32 @@
                                 <span>Age</span>
                                 <strong id="char-age">19</strong>
                             </div>
+                            <div class="stat-row">
+                                <span>Height</span>
+                                <strong id="char-height">174cm</strong>
+                            </div>
+
+                            <!-- Power Bars -->
+                            <h4 class="power-heading">Power Ratings</h4>
+                            <div class="power-bars" id="power-bars"></div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Wanted Poster -->
                 <div class="visual-panel">
                     <div class="poster-card tilt-card" id="poster-card">
-                        <div class="poster-shine"></div> <div class="poster-inner">
+                        <div class="poster-shine" aria-hidden="true"></div>
+                        <div class="poster-inner">
                             <div class="poster-header">WANTED</div>
                             <div class="poster-sub">DEAD OR ALIVE</div>
-                            
+
                             <div class="poster-image-container">
-                                <img src="" id="poster-img" alt="Character">
+                                <img src="" id="poster-img" alt="Wanted poster of Monkey D. Luffy" loading="lazy">
                             </div>
 
                             <div class="poster-name" id="poster-name">MONKEY D. LUFFY</div>
-                            
+
                             <div class="poster-bounty">
                                 <span class="currency">฿</span>
                                 <span id="char-bounty">3,000,000,000</span>
@@ -106,12 +151,18 @@
                             <div class="poster-footer">MARINE</div>
                         </div>
                     </div>
+
+                    <!-- Character counter -->
+                    <div class="char-counter" id="char-counter">1 / 12</div>
                 </div>
 
             </div>
         </main>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Back to top -->
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
