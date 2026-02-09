@@ -1,61 +1,50 @@
-# ☠️ OnePiece-Book — Pirate Encyclopedia
+### OnePiece-Book
 
-An interactive One Piece character encyclopedia built with vanilla HTML, CSS, and JavaScript. Browse the Straw Hat crew and legendary pirates through wanted posters, crew details, power stats, and more.
+OnePiece-Book is an interactive web-based character encyclopedia inspired by the One Piece manga and anime series. The project was built entirely from scratch using HTML, CSS, and JavaScript with no external frameworks or libraries.
 
-## ✨ Features
+The application features detailed profiles for 18 legendary pirates, including all ten members of the Straw Hat crew along with notable characters such as Shanks, Kaido, Ace, Whitebeard, Trafalgar Law, Boa Hancock, Dracule Mihawk, and Blackbeard. Each profile includes the character's bounty, backstory, devil fruit or combat abilities, power ratings across five categories, an iconic quote, and their first appearance in the manga.
 
-- 🏴‍☠️ **12 Characters** — Full Straw Hat crew (including Jinbe), Shanks, and Kaido
-- 🎴 **3D Wanted Posters** — Interactive tilt effect with dynamic shine
-- 🎨 **Dynamic Theming** — Accent color changes per character
-- 🔍 **Search & Filter** — Instantly find any pirate by name, crew, or role
-- 📊 **Power Stat Bars** — Animated strength, speed, haki, devil fruit, and endurance ratings
-- ⌨️ **Keyboard Navigation** — Use arrow keys to browse characters
-- 📱 **Fully Responsive** — Works great on desktop, tablet, and mobile
-- 🌊 **Glassmorphism UI** — Frosted glass sidebar and cards
-- ⚡ **Loading Screen** — Smooth entry animation
-- ♿ **Accessible** — ARIA roles, keyboard focus styles, semantic HTML
+The interface is designed with a glassmorphism aesthetic, using frosted glass panels and layered transparency against a dark background. Every character has a unique accent color that dynamically updates the entire interface when selected, giving each profile a distinct visual identity. The wanted poster section uses a 3D perspective tilt effect with a light reflection overlay that responds to mouse movement.
 
-## 🚀 Live Demo
+Users can navigate between characters using the sidebar, a search bar that filters by name, crew, or role, keyboard arrow keys, or swipe gestures on touch devices. A random character button is also available for quick discovery.
 
-> Enable GitHub Pages in **Settings → Pages → Source: main branch** to deploy!
+The project is fully responsive with three breakpoints covering desktop, tablet, and mobile layouts. On smaller screens, the sidebar converts to a slide-in drawer with a hamburger toggle. Accessibility has been considered throughout, with ARIA roles, labels, keyboard support, and reduced motion preferences respected for users who have that setting enabled.
 
-## 🛠️ Tech Stack
+This project was built as a personal challenge to create something visually polished and functionally rich without depending on any tooling beyond the core web technologies.
 
-- HTML5
-- CSS3 (Custom Properties, Grid, Flexbox, Animations)
-- Vanilla JavaScript (No frameworks)
-- Google Fonts (Cinzel, Inter, Rye)
+---
 
-## 📁 Project Structure
+## Project Highlights
 
-```
-OnePiece-Book/
-├── index.html
-├── css/
-│   └── style.css
-├── js/
-│   └── script.js
-├── images/
-│   ├── logo.jpg
-│   ├── luffy.jpg
-│   ├── zoro.jpg
-│   └── ...
-└── README.md
-```
+- 18 character profiles with complete lore, stats, and imagery
+- Dynamic color theming that adapts to each character
+- 3D interactive wanted poster cards with tilt and shine effects
+- Animated power rating bars with staggered reveal
+- Live search filtering by name, crew, or role
+- Keyboard and touch-based navigation
+- Random character discovery
+- Fully responsive layout across all screen sizes
+- Glassmorphism design with frosted glass panels and layered backgrounds
+- Accessible markup with ARIA attributes and reduced motion support
+- No frameworks or libraries used
 
-## 💻 Run Locally
+---
 
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/elitepunith/OnePiece-Book.git
-   ```
-2. Open `index.html` in your browser — that's it!
+## Controls
 
-## 📝 License
+- Arrow keys to move between characters
+- Click any name in the sidebar to select
+- Type in the search bar to filter the character list
+- Swipe left or right on mobile to navigate
+- Press Escape to close the mobile sidebar
+- Use the random button to load a surprise character
 
-MIT License — feel free to use and modify.
+---
 
-## 🙏 Credits
+## Tech Stack
 
-- Character data from the [One Piece Wiki](https://onepiece.fandom.com/)
-- Fonts from [Google Fonts](https://fonts.google
+- HTML5 with semantic and accessible markup
+- CSS3 with custom properties, grid layout, glassmorphism, and responsive media queries
+- Vanilla JavaScript with DOM manipulation, event delegation, and touch event handling
+
+---
